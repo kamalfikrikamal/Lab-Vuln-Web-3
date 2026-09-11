@@ -1,0 +1,73 @@
+* { box-sizing: border-box; }
+body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    color: #1f2937;
+}
+.navbar {
+    background: #1e3a5f;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand { color: #fff; text-decoration: none; font-weight: 600; }
+.navbar-brand span { font-weight: 400; font-size: 0.8rem; opacity: 0.8; margin-left: 0.5rem; }
+.navbar nav a { color: #dbeafe; margin-left: 1rem; text-decoration: none; }
+.navbar-user { margin-left: 1rem; opacity: 0.9; }
+.container { max-width: 900px; margin: 1.5rem auto; padding: 0 1rem; }
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.card-narrow { max-width: 360px; margin: 3rem auto; }
+.card-header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+form label { display: block; margin-bottom: 0.75rem; font-size: 0.9rem; }
+form input, form select, form textarea {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+button {
+    background: #1e3a5f;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+button:hover { background: #16304d; }
+.table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.table th, .table td { text-align: left; padding: 0.5rem; border-bottom: 1px solid #e5e7eb; font-size: 0.9rem; }
+.badge { padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.75rem; }
+.badge-pending { background: #fef3c7; color: #92400e; }
+.badge-approved { background: #d1fae5; color: #065f46; }
+.badge-rejected { background: #fee2e2; color: #991b1b; }
+.detail-list dt { font-weight: 600; margin-top: 0.75rem; }
+.detail-list dd { margin: 0.15rem 0 0 0; }
+.alert { padding: 0.5rem 0.75rem; border-radius: 4px; }
+.alert-error { background: #fee2e2; color: #991b1b; }
+.muted { color: #6b7280; font-size: 0.85rem; }
+.search-form { display: flex; gap: 0.5rem; }
+.search-form input { width: auto; }
+.flash { display: none; }
+.flash-visible {
+    display: block;
+    max-width: 900px;
+    margin: 1rem auto 0 auto;
+    padding: 0.75rem 1rem;
+    background: #dbeafe;
+    color: #1e3a5f;
+    border-radius: 6px;
+}
+.site-footer { text-align: center; color: #9ca3af; font-size: 0.8rem; padding: 2rem 0; }

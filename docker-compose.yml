@@ -1,0 +1,42 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: klaimku
+      MYSQL_USER: klaimku_app
+      MYSQL_PASSWORD: klaimku_app_pw
+      MYSQL_ROOT_PASSWORD: klaimku_root_pw
+    volumes:
+      - ./app/sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./app/sql/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    # BERBEDA DARI LAB 1 & 2 (yang tidak pernah expose DB ke host): di lab ini
+    # port MySQL SENGAJA dipublikasikan ke host sebagai bagian dari skenario -
+    # dikombinasikan dengan kredensial yang bocor lewat LFI (lihat
+    # app/www/debug_viewer.php + /var/www/.env), ini membuat DB bisa diakses
+    # langsung dari luar container tanpa lewat aplikasi web sama sekali.
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: klaimku
+      DB_USER: klaimku_app
+      DB_PASS: klaimku_app_pw
+    ports:
+      - "8084:80"
+    # Sengaja TIDAK ada cap_drop/security_opt/privileged di sini. Skenario
+    # privesc lab ini murni lewat bit SUID yang salah konfigurasi pada
+    # `/usr/bin/find` (lihat docker/web/Dockerfile), jadi tidak bergantung pada
+    # capability bawaan Docker seperti Lab 2 - tetap dibiarkan default apa
+    # adanya supaya konsisten dengan lab lain (tidak ada hardening tambahan
+    # yang disuntikkan khusus untuk membuat lab "terasa aman").
+
+volumes:
+  db-data:
