@@ -1,0 +1,4 @@
+packer/output/
+packer/build-context/
+packer_cache/
+*.ova

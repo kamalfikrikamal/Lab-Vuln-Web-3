@@ -7,7 +7,7 @@ milik perusahaan fiktif "PT Cahaya Abadi Sejahtera".
 Untuk penggunaan edukasi/latihan pentest terotorisasi saja - jalankan hanya di
 environment lokal/terisolasi.
 
-## Menjalankan Lab
+## Menjalankan Lab (Docker Compose)
 
 ```bash
 docker compose up --build
@@ -19,6 +19,29 @@ Hentikan & bersihkan:
 ```bash
 docker compose down -v
 ```
+
+## Menjalankan Lab (OVA / VirtualBox)
+
+Lab ini juga tersedia sebagai **OVA (VirtualBox)** untuk skenario yang butuh VM mandiri
+dengan IP sendiri tanpa peserta perlu install Docker.
+
+1. Buka VirtualBox > **File > Import Appliance**, pilih file `klaimku.ova` yang diterima
+   dari instruktur.
+2. Saat proses import, VirtualBox akan meminta memilih interface jaringan fisik untuk
+   adapter kedua (bridged) - pilih interface yang terhubung ke jaringan yang sama dengan
+   laptop Anda.
+3. Nyalakan VM. Begitu boot selesai, layar console VM (**tanpa perlu login**) akan
+   menampilkan IP dan URL lab, contoh:
+   ```
+   === KlaimKu Lab ===
+   Lab URL: http://192.168.1.50:8084
+   ====================
+   ```
+4. Buka URL tersebut di browser pada laptop Anda.
+
+Jika adapter jaringan VM menampilkan "Not attached" setelah import, buka VM Settings >
+Network > Adapter 2 dan pilih ulang jenis adapter (bridged) secara manual, lalu nyalakan
+ulang VM. Panduan build OVA untuk maintainer ada di `docs/OVA_BUILD.md`.
 
 ## Akun Demo
 
@@ -52,4 +75,5 @@ docker/web/            Dockerfile, vhost Apache
 app/www/                Source PHP aplikasi
 app/sql/                Skema + seed data MySQL
 docs/                   Dokumentasi instruktur (arsitektur, kunci jawaban, checklist pengujian)
+packer/                 Build OVA (VirtualBox) via Packer - lihat docs/OVA_BUILD.md
 ```
